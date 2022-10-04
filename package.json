@@ -1,0 +1,34 @@
+{
+  "name": "tetiary-messaging-system_v1",
+  "version": "1.0.0",
+  "description": "a solution for all tetiary communications",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "client-install": "npm install --prefix client",
+    "start": "node server.js",
+    "server": "nodemon server.js",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+  },
+  "keywords": [
+    "Instant-messaging"
+  ],
+  "author": "Isaac Tsibu-Darko, Pingiguan Avetu",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.27.2",
+    "body-parser": "^1.20.0",
+    "concurrently": "^7.4.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.1",
+    "express-jwt": "^7.7.5",
+    "helmet": "^6.0.0",
+    "jwks-rsa": "^2.1.4",
+    "mongoose": "^6.6.3",
+    "nodemon": "^2.0.20",
+    "pusher": "^5.1.1-beta"
+  }
+}
