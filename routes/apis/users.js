@@ -13,8 +13,8 @@ const Chats = require('../../models/Chats');
 
 const options = {
     method: 'GET',
-    url: 'https://dev--fe2sg9v.us.auth0.com/api/v2/users',
-    headers: {"authorization": "Bearer TOKEN"}
+    url: 'https://tms.com',
+    headers: {"authorization": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InkzR3RhdGJTQWtxV2VwQkQ5Z19rViJ9.eyJpc3MiOiJodHRwczovL2Rldi0tZmUyc2c5di51cy5hdXRoMC5jb20vIiwic3ViIjoiZmttbFZHM3d0RTlPRXcxN2NKcm1rNGpYOHFOeTJ2VGlAY2xpZW50cyIsImF1ZCI6Imh0dHBzOi8vdG1zLmNvbSIsImlhdCI6MTY2NTU5NjY2MywiZXhwIjoxNjY1NjgzMDYzLCJhenAiOiJma21sVkczd3RFOU9FdzE3Y0pybWs0alg4cU55MnZUaSIsImd0eSI6ImNsaWVudC1jcmVkZW50aWFscyJ9.L7ednXmd7H2gmr8mHnJDNB1n47jI3oSp4azXXGV5Behzsn9JXTl_PTN0DJ5lHFqIhzsE7suUW2kHgB_UNiEDOFz82EyrXW5DEV8l0QP3JMor4eBlH_GtkTXTIjxJx-AbK6OkIkhRjM9QXhPkeZGsYmHT9K45AU19jpxliFwtfBPOD81LS_pf-Ol2AqhNcesOIzLVl05Z3UV-jHp5SOSx_UWeo_oyOSYpYq2_7OM10IjBjEzgZQVAOP2w67rkmp3NPiSV0MifHbFrRZUoKAv3CmMlFzf3W5veUwg7XEmn8gXyybJQvdxOavr3jCtMl6mBF4ADHS2ZlNH_liWwrmnmIw"}
 };
 axios.request(options).then(function (response) {
     //console.log(response.data);

@@ -1,10 +1,10 @@
-const { expressjwt: expressJwt } = require('express-jwt');
+const { expressjwt: jwt } = require("express-jwt");
 const jwks = require('jwks-rsa');
 const {domain, audience} = require('./authVariables.json');
 require('dotenv').config();
 
 //set up jwt for tokens
-const jwtCheck = expressjwt({
+const jwtCheck = jwt({
     secret: jwks.expressJwtSecret({
         cache: true,
         rateLimit: true,
@@ -12,8 +12,7 @@ const jwtCheck = expressjwt({
         jwksUri: 'https://dev--fe2sg9v.us.auth0.com/.well-known/jwks.json',
     }),
 
-
-    audience: 'https://ready-for-action',
+    audience: 'https://tms.com',
     issuer: 'https://dev--fe2sg9v.us.auth0.com/',
     algorithms: ['RS256']
 })
