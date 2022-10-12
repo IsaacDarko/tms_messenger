@@ -1,10 +1,10 @@
-const jwt = require('express-jwt')
+const { expressjwt: expressJwt } = require('express-jwt');
 const jwks = require('jwks-rsa');
 const {domain, audience} = require('./authVariables.json');
 require('dotenv').config();
 
 //set up jwt for tokens
-const jwtCheck = jwt({
+const jwtCheck = expressjwt({
     secret: jwks.expressJwtSecret({
         cache: true,
         rateLimit: true,
