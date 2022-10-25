@@ -7,14 +7,11 @@ import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
 import React from 'react';
 import axios from '../axios';
 import AuthNav from './auth-nav';
-import Loading from './Loading';
-import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
+import LogoutButton from './logout-button';
 
-const Chat = (props) => { 
-    const { user } = useAuth0();
-    const [ chatId, setChatId ] = useState();
-    const { currentChat } = props;
-    const { isChatId, fetchChat, messageMine } = props;
+
+const Chat = (props) => {
+    const { user, chatId, setChatId, isChatId, fetchChat, messageMine, currentChat, chats, logout } = props;
     const [endPicture, setEndPicture] = useState('');
     const [endName, setEndName] = useState('');
     const [endLastSeen, setEndLastSeen] = useState('')
@@ -22,96 +19,81 @@ const Chat = (props) => {
     console.log(user);
     console.log(messages);
     const [input, setInput] = useState("");
-    
 
-    
-    useEffect(() =>{
+
+    useEffect(() => {
         console.log(currentChat)
         unlock()
         setup();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [currentChat, isChatId]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [currentChat, isChatId, messages]);
 
 
-    useEffect(() =>{
+    useEffect(() => {
         setup();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [currentChat, endPicture, endName, endLastSeen]);
 
 
-    useEffect(() =>{
-        if(!messageMine){
-            fetchChat()
-        }else if(messageMine === true){
-            fetchChat()
-        }else{
-            window.location.reload(false);
-        }
-    
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [messageMine]);
-
-
-    const unlock = () =>{
+    const unlock = () => {
         console.log(isChatId)
-        if( isChatId === false ){
-            setChatId()
+        if (isChatId === false) {
             console.log('ChatPage Unlock Failed...No chats exist in this account')
-        }else{
-            setChatId(true);
+        } else {
             console.log('ChatPage Unlock Successful')
+
         }
     }
 
-    const setup = () =>{
+    const setup = () => {
         console.log(chatId);
-        if(currentChat === undefined || currentChat === null){
+        if (currentChat === undefined || currentChat === null) {
             setEndPicture('')
             setEndName('Name')
             setEndLastSeen('Recently')
         }
-        else{           
-            const { picture, name, last_login } = currentChat;
+        else {
+            const { picture, fullname, last_seen } = currentChat;
             setEndPicture(picture)
-            setEndName(name)
-            setEndLastSeen(last_login)
+            setEndName(fullname)
+            setEndLastSeen(last_seen)
         }
     }
 
 
     const sendMessage = (e) => {
-        e.preventDefault(); 
+        e.preventDefault();
         const chatid = localStorage.getItem('chatid');
-        const specialkey= localStorage.getItem('chatSpecialKey');
+        const specialkey = localStorage.getItem('chatSpecialKey');
         const details = JSON.parse(localStorage.getItem('currentUser'));
+        console.log(`message chat id: ${chatid}, specialkey: ${specialkey}, message details: ${details}`)
         console.log(details);
         console.log(details.displayname);
         console.log(chatid);
-        if (chatid !== null || chatid !== ''){
-            axios.post('/api/messages', {
-                chatid: chatid,            
+        if (chatid !== null || chatid !== '') {
+            axios.post('http://localhost:5000/api/messages', {
+                chatid: chatid,
                 message: input,
-                name:user.name,
-                senderid:user.sub,
-                sndrsdispname:user.nickname,
-                receivername:details.name,
+                name: user.name,
+                senderid: user.userid,
+                sndrsdispname: user.name,
+                receivername: details.name,
                 receiverspic: details.pic,
-                receiverdispname:details.displayname,
+                receiverdispname: details.name,
                 chatSpecialKey: specialkey
-                
-            }).then( response =>{
+            }).then(response => {
                 console.log(response);
-                if(response.status === 208){
+                if (response.status === 208) {
                     alert('This User Has Blocked You')
-                }else if(response.status === 200){
+                } else if (response.status === 200) {
                     setInput("");
-                }else{
+                } else {
                     console.log(`Something's not right the message was not sent`)
                 }
             })
-            .catch(err => console.log(err))
+                .catch(err => console.log(err))
 
-        } else{
+        } else {
             alert("Please select an existing chat or start a new one before sending a message")
         }
     }
@@ -121,101 +103,99 @@ const Chat = (props) => {
 
 
     return !chatId ? (
-                <div className="chat">
+        <div className="chat">
 
-                    <div className="chat__header">
-                        <Avatar />
+            <div className="chat__header">
+                <Avatar />
 
-                        <div className="chat__headerInfo">
-                            <h3>Name</h3>
-                            <h5>Last Seen: ...</h5>
-                        </div>
+                <div className="chat__headerInfo">
+                    <h3>Name</h3>
+                    <h5>Last Seen: ...</h5>
+                </div>
 
-                        <div className="chat__headerRight">
-                            <IconButton>
-                                <SearchOutlined />
-                            </IconButton>
-                            <IconButton>
-                                <AttachFile />                      
-                            </IconButton>
-                            <AuthNav />
-                        </div>
-                        
-                    </div>
-
-
-                    <div className="chat__body">
-                        <h4>Select an existing conversation or start A New One</h4>
-                    </div>
-
-
-                    <div className="chat__footer">
-                        <InsertEmoticonIcon />
-                        <form>
-                            <input value={input} onChange={e => 
-                            setInput(e.target.value)} placeholder="type a message" type="text" />
-                            <button onClick={()=> {                                
-                                alert('You need to select a chat first before sending a message')
-                                }
-                                } type="submit"><SendIcon/></button>
-                        </form>
-                    </div>
+                <div className="chat__headerRight">
+                    <IconButton>
+                        <SearchOutlined />
+                    </IconButton>
+                    <IconButton>
+                        <AttachFile />
+                    </IconButton>
+                    <LogoutButton logout={logout} />
+                </div>
 
             </div>
 
-    ):(
-                <div className="chat">
 
-                    <div className="chat__header">
-                        <Avatar src={endPicture} />
+            <div className="chat__body">
+                <h4 >Select an existing conversation or start A New One</h4>
+            </div>
 
-                        <div className="chat__headerInfo">
-                            <h3>{endName}</h3>
-                            <p><h5>Last Seen: </h5>{endLastSeen}....</p>
-                        </div>
 
-                        <div className="chat__headerRight">
-                            <IconButton>
-                                <SearchOutlined />
-                            </IconButton>
-                            <IconButton>
-                                <AttachFile />                      
-                            </IconButton>
-                            <AuthNav />
-                        </div>
-                        
+            <div className="chat__footer">
+                <InsertEmoticonIcon />
+                <form>
+                    <input value={input} onChange={e =>
+                        setInput(e.target.value)} placeholder="type a message" type="text" />
+                    <button onClick={() => {
+                        alert('You need to select a chat first before sending a message')
+                    }
+                    } type="submit"><SendIcon /></button>
+                </form>
+            </div>
+
+        </div>
+
+    ) : (
+        <div className="chat">
+
+            <div className="chat__header">
+                <Avatar src={endPicture} />
+
+                <div className="chat__headerInfo">
+                    <h3>{endName}</h3>
+                    <p><h5>Last Seen: </h5>{endLastSeen}....</p>
+                </div>
+
+                <div className="chat__headerRight">
+                    <IconButton>
+                        <SearchOutlined />
+                    </IconButton>
+                    <IconButton>
+                        <AttachFile />
+                    </IconButton>
+                    <LogoutButton logout={logout} />
+                </div>
+
+            </div>
+
+
+            <div className="chat__body">
+                {messages.map((message) => (
+                    <div className="message__container" key={message._id}>
+                        <p className={`chat__message ${user.name !== message.receivername && 'sender__myself'}`}>
+                            <span className="chat__name">{(message.senderid === user.userid) ? user.name : currentChat.fullname}</span>
+                            {message.message}
+                            <span className="chat__timestamp">
+                                {message.timestamp}
+                            </span>
+                        </p>
                     </div>
+                ))}
+            </div>
 
 
-                    <div className="chat__body">
-                        {messages.map((message) => (
-                            <div className="message__container" key={message._id}>
-                                <p className={`chat__message ${user.name !== message.receivername && 'sender__myself'}`}>
-                                    <span className="chat__name">{message.name}</span>
-                                        {message.message}
-                                    <span className="chat__timestamp">
-                                        { message.timestamp }
-                                    </span>
-                                </p>                        
-                            </div>
-                        ))}                        
-                    </div>
+            <div className="chat__footer">
+                <InsertEmoticonIcon />
+                <form>
+                    <input value={input} onChange={e =>
+                        setInput(e.target.value)} placeholder="type a message" type="text" />
+                    <button onClick={sendMessage} type="submit"><SendIcon /></button>
+                </form>
+            </div>
 
-
-                    <div className="chat__footer">
-                        <InsertEmoticonIcon />
-                        <form>
-                            <input value={input} onChange={e => 
-                            setInput(e.target.value)} placeholder="type a message" type="text" />
-                            <button onClick={sendMessage} type="submit"><SendIcon/></button>
-                        </form>
-                    </div>
-
-                    </div>
+        </div>
 
     )
 }
 
-export default withAuthenticationRequired(Chat, {
-    onRedirecting: () => <Loading />,
-});
+export default Chat;

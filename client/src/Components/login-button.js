@@ -1,12 +1,13 @@
 import React from "react";
-import { useAuth0 } from "@auth0/auth0-react";
+import { Widgets } from "@material-ui/icons";
 
-const LoginButton = () => {
-  const { loginWithRedirect } = useAuth0();
+const LoginButton = ({ ready, setReady, login, logs }) => {
+
   return (
     <button
       className="btn btn-primary btn-block"
-      onClick={() => loginWithRedirect()}
+      onMouseEnter={() => setReady(!ready)}
+      onClick={() => login(logs)}
     >
       Log In
     </button>
