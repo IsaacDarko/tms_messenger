@@ -104,7 +104,7 @@ router.post('/', (req, res) => {
 //@desc Registers new users
 //@access Public*
 router.post('/signup', (req, res) => {
-    const { username, userid, fullname, email, password, last_seen, level, faculty, session, index_num } = req.body;
+    const { username, userid, fullname, email, password, last_seen, level, faculty, session, index_num } = req.body.options;
     //validate input
     if (!userid || !fullname || !email || !index_num || !password || !level || !faculty || !session) {
         return res.status(400).json("Please Provide All Required Registration Details")

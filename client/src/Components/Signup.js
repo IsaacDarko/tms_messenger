@@ -1,5 +1,10 @@
 import React, {useState, useEffect, useContext} from 'react';
 import TextField from '@mui/material/TextField';
+import Login from './Login';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
 import axios from 'axios';
 import LoginButton from './login-button';
 import { GlobalContext } from '../Contexts/GlobalContext';
@@ -10,7 +15,7 @@ import moment from 'moment';
 
 const Signup = () => {
     const { signup } = useContext(GlobalContext);
-
+    const [authType, setAuthType] = useState('signup');
     const [username, setUsername] = useState('');
     const [fullname, setFullname] = useState('');
     const [compyear, setCompyear] = useState('')
@@ -26,8 +31,9 @@ const Signup = () => {
     
 
     const today = moment();
+   
     const now = moment(today).format("hh:mm:ss a");
-    console.log(now)
+    console.log(today.format())
 
 
     const setupOptions = (event) => {
@@ -88,7 +94,7 @@ const Signup = () => {
             'index_num': indexNum,
             'password': password,
             'repassword': repassword,
-            'lastSeen': now
+            'lastSeen': today.format()
         })
         console.log(details)
     }, [ready]);
@@ -96,7 +102,7 @@ const Signup = () => {
 
 
 
-    return(        
+    return authType === 'signup' ? (        
         <div className="signup__body">
             <div className="signup__inner">
                 <div className="signup__header">
@@ -126,18 +132,60 @@ const Signup = () => {
                     </span>
 
                     <span className='sfields' >
-                        <TextField required id="standard-required" name="level" label="Level"  variant="standard"
-                            onChange={e => setupOptions(e)} />
+                        <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+                            <InputLabel id="demo-simple-select-label">Level</InputLabel>
+                            <Select
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-select"
+                                name='level'
+                                label="Level"
+
+                                onChange={e => setupOptions(e)}
+                            >
+                                <MenuItem value={'100'}>Level 100</MenuItem>
+                                <MenuItem value={'200'}>Level 200</MenuItem>
+                                <MenuItem value={'300'}>Level 300</MenuItem>
+                                <MenuItem value={'400'}>Level 400</MenuItem>
+                            </Select>
+                        </FormControl>
                     </span>
 
                     <span className='sfields' >
-                        <TextField required id="standard-required" name="faculty" label="Faculty" variant="standard"
-                            onChange={e => setupOptions(e)} />
+                        <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }} >
+                            <InputLabel id="demo-simple-select-label">Faculty</InputLabel>
+                            <Select
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-select"
+                                name='faculty'
+                                label="Faculty"
+                                fullWidth="true"
+                                onChange={e => setupOptions(e)}
+                            >
+                                <MenuItem value={'FOI'}>Infomatics</MenuItem>
+                                <MenuItem value={'Egineering'}>Egineering</MenuItem>
+                                <MenuItem value={'Telecom'}>Telecommunication</MenuItem>
+                                <MenuItem value={'Business'}>Business</MenuItem>
+                            </Select>
+                        </FormControl>
                     </span>
 
                     <span className='sfields' >
-                        <TextField required id="standard-required" name="session" label="Session" variant="standard"
-                            onChange={e => setupOptions(e)} />
+                        <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }} >
+                            <InputLabel id="demo-simple-select-label">Session</InputLabel>
+                            <Select
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-select"
+                                name='session'
+                                label="Session"
+                                fullWidth="true"
+                                onChange={e => setupOptions(e)}
+                            >
+                                <MenuItem value={'regular'}>Regular</MenuItem>
+                                <MenuItem value={'morning'}>Morning</MenuItem>
+                                <MenuItem value={'evening'}>Evening</MenuItem>
+                                <MenuItem value={'weeekend'}>Weekend</MenuItem>
+                            </Select>
+                        </FormControl>
                     </span>
 
                     <span className='sfields' >
@@ -166,12 +214,24 @@ const Signup = () => {
                             onClick={() => signup(details)}
                         >
                             Sign Up
-                        </button>
+                        </button>                        
                     </div>
+
+                    <div  className='sbutton__wrapper'>
+                        <p className='login__span'>
+                            Already have an account? 
+                            <span onClick={() => setAuthType('login')}>
+                                Login
+                            </span>     
+                        </p>
+                    </div>
+
                 </div>
             </div>
         </div>
 
+    ) : (
+        <Login />
     )
 }
 

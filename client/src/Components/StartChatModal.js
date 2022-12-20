@@ -1,16 +1,11 @@
-import React from 'react';
+import React, { useEffect, useState, useContext } from 'react';
+import { GlobalContext } from '../Contexts/GlobalContext';
 import { Avatar } from '@material-ui/core';
-import { useState, useEffect } from 'react';
 import '../Styles/StartChatModal.css';
 
 
-const StartChatModal = (props) => {
-    const {
-        user,
-        chats,
-        contactlist,
-        selectUser
-    } = props;
+const StartChatModal = () => {
+    const { user, chats, contactlist, selectUser, show, switchOff } = useContext(GlobalContext);
 
     const [recptId, setRecptId] = useState('');
     const [recptName, setRecptName] = useState('');
@@ -19,10 +14,10 @@ const StartChatModal = (props) => {
     const [dispPic, setdispPic] = useState('');
     const [recptIndex, setRecptIndex] = useState('');
 
-
     const [selectedUser, setSelectedUser] = useState({});
+
     const toggle = () => {
-        props.switchOff();
+        switchOff();
     }
 
 
@@ -52,18 +47,18 @@ const StartChatModal = (props) => {
         localStorage.setItem('selectedUser', JSON.stringify(reciepient));
         selectUser()
     }
-
+ 
 
     useEffect((e) => {
         // eslint-disable-next-line no-mixed-operators
-        if (chats !== undefined || recptId !== '' && recptName !== '' && recptMail !== '' && dispName !== '') {
+        if (chats !== undefined && recptId !== '' && recptName !== '' && recptMail !== '' && dispName !== '') {
             secureContactDeets();
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [recptId, recptName, recptMail, dispName])
 
 
-    return props.show ? (
+    return show ? (
 
         <div className="modal__wrapper" onClick={() => toggle()}>
             <div className="modal__inner">

@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState, useEffect, useContext} from "react";
+import { GlobalContext } from "../Contexts/GlobalContext";
 import LoginButton from "./login-button";
 import LogoutButton from "./logout-button";
 
 
 
-const AuthenticationButton = ({ isAuthenticated }) => {
+const AuthenticationButton = () => {
+  const { isAuthenticated } = useContext(GlobalContext)
 
   return isAuthenticated ? <LogoutButton /> : <LoginButton />;
 };

@@ -72,7 +72,7 @@ const GlobalProvider = ({ children }) => {
         setIsAuthenticated(true);
       }
       // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [user]);
+    }, []);
 
 
 
@@ -121,7 +121,10 @@ const GlobalProvider = ({ children }) => {
               localStorage.setItem('user', JSON.stringify(user));
               setToken(token);
               setUser(user)
-            }).catch(err => console.log(`there was an login API Error : ${err}`))
+              setIsAuthenticated(true)
+            })
+            .catch(err => console.log(`there was an signup API Error : ${err}`));
+
         }else{
             setTimeout(() => {
                 setErrMsge('the passwords you typed do not match')
@@ -499,7 +502,7 @@ const GlobalProvider = ({ children }) => {
         messageMine, setMessageMine,
         loggedInUser, setLoggedInUser,
         currentChat, setCurrentChat,
-
+ 
         signup,
         login,
         localShred,

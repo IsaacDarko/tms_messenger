@@ -1,14 +1,17 @@
 .signup__body {
     display: grid;
     place-items: center;
-    background-color: #dadbd3;
+    background-color: #262d3d;
     height: 100vh;
 }
 
 .signup__inner{    
+    background: rgb(84,225,255);
+    background: linear-gradient(0deg, rgba(84,225,255,1) 0%, rgba(216,235,246,1) 7%, rgba(235,213,233,1) 88%, rgba(255,79,79,1) 100%); 
     display: grid;
     background-color: #ededed;
     width: 30vw;
+    height: 70vh;
     place-items: center;
     box-shadow: -1px 4px 20px -6px rgba(0,0,0,0.7);
     border-radius: 10px;
@@ -16,7 +19,7 @@
 
 .signup__header {
     border-bottom: 1px solid lightgrey;
-    padding-bottom: 30px;
+    padding-bottom: 5px;
     padding: auto;
     
 } 
@@ -30,4 +33,15 @@
 
 .sfields {
     margin: 0 1.3rem;
+}
+
+
+.login__span > span {
+    color: lightseagreen;
+    margin: 0 0.3rem;
+}
+
+.login__span > span:hover {
+    color: rgb(41, 91, 88);
+    cursor: pointer;
 }

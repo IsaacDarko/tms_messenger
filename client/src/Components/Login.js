@@ -5,7 +5,7 @@ import { GlobalContext } from '../Contexts/GlobalContext';
 import LoginButton from './login-button';
 import SignupButton from './signup-button';
 import '../Styles/LoginButton.css';
-import '../Styles/Login.css';
+import '../Styles/Login.css'; 
 
 function Login() {
     const {data, login} = useContext(GlobalContext);
@@ -45,11 +45,15 @@ function Login() {
                 </div>
 
                 <div className="login_FormFields">
-                    <TextField required id="standard-required" name="index_num" label='Index Number' variant="standard"
-                        onChange={e => setupLogs(e)} />
+                    <div className='lfields'>
+                        <TextField required id="standard-required" name="index_num" label='Index Number' variant="standard" fullWidth="true"
+                            onChange={e => setupLogs(e)} />
+                    </div>
 
-                    <TextField required id="standard-password-input" name="password" label="Password" type="password" variant="standard"
-                        onChange={e => setupLogs(e)} />
+                    <div className='lfields'>
+                        <TextField required id="standard-password-input" name="password" label="Password" type="password" variant="standard"
+                            fullWidth="true" onChange={e => setupLogs(e)} />
+                    </div>
                 </div>
                 <div className="submition__buttons">
                     <div>

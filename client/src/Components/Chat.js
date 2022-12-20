@@ -1,21 +1,18 @@
-import { useState, useEffect } from 'react';
-import '../Styles/Chat.css';
+import React, { useEffect, useState, useContext } from 'react';
+import { GlobalContext } from '../Contexts/GlobalContext';import '../Styles/Chat.css';
 import { Avatar, IconButton } from '@material-ui/core';
 import { AttachFile, SearchOutlined } from '@material-ui/icons';
 import SendIcon from '@material-ui/icons/Send';
 import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
-import React from 'react';
 import axios from '../axios';
-import AuthNav from './auth-nav';
 import LogoutButton from './logout-button';
 
 
-const Chat = (props) => {
-    const { user, chatId, setChatId, isChatId, fetchChat, messageMine, currentChat, chats, logout } = props;
+const Chat = () => {
+    const { user, chatId, setChatId, isChatId, fetchChat, messages, messageMine, currentChat, chats, logout } = useContext(GlobalContext);
     const [endPicture, setEndPicture] = useState('');
     const [endName, setEndName] = useState('');
-    const [endLastSeen, setEndLastSeen] = useState('')
-    const { messages } = props;
+    const [endLastSeen, setEndLastSeen] = useState('');
     console.log(user);
     console.log(messages);
     const [input, setInput] = useState("");

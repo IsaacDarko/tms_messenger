@@ -1,16 +1,18 @@
 .login__body {
     display: grid;
     place-items: center;
-    background-color: #dadbd3;
+    background-color: #262d3d;
     height: 100vh;
 }
 
-.login__inner{
-    
+.login__inner{    
+    background: rgb(255,205,251);
+    background: linear-gradient(0deg, rgba(255,205,251,1) 0%, rgba(192,231,255,1) 23%, rgba(192,231,255,1) 73%, rgba(255,165,165,1) 100%);
     display: grid;
+    align-content: center;
     background-color: #ededed;
-    height: 50vh;
-    width: 20vw;
+    height: 60vh;
+    width: 22vw;
     place-items: center;
     box-shadow: -1px 4px 20px -6px rgba(0,0,0,0.7);
     border-radius: 10px;
@@ -18,7 +20,20 @@
 
 .login__header {
     border-bottom: 1px solid lightgrey;
-    padding-bottom: 30px;
     padding: auto;
     
+}
+
+.login_FormFields {
+    display: grid;
+    width: 70%;
+    padding: 1rem 1rem;
+    align-items: center;
+}
+
+
+.lfields > input {
+    width: 100%;
+    margin: 1rem 1.2rem;
+    size: 100%;
 }

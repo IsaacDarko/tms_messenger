@@ -1,5 +1,5 @@
-import React from 'react';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
+import { GlobalContext } from '../Contexts/GlobalContext';
 import '../Styles/Sidebar.css';
 import '../Styles/SidebarChat.css'
 import { Avatar, IconButton } from '@material-ui/core';
@@ -11,7 +11,11 @@ import RemoveCircleOutlineIcon from '@material-ui/icons/RemoveCircleOutline';
 import BlockIcon from '@material-ui/icons/Block';
 
 
-function Sidebar({ user, setIsChatId, chatsExist, setChatsExist, setShow, chats, fetchChat, addNewChat, blockUser, chatRejuvinate, msgesNum, setMsgesNum, deleteNow, unblockUser }) {
+function Sidebar() {
+    const { user, setIsChatId, chatsExist, setChatsExist, setShow, chats, 
+            fetchChat, addNewChat, blockUser, chatRejuvinate, msgesNum, 
+            setMsgesNum, deleteNow, unblockUser } = useContext(GlobalContext)
+
     //declaring state holders for the selectchat function variables
     const [chatid, setChatid] = useState('');
     const [currUserId, setCurrUserId] = useState('');
