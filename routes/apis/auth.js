@@ -9,7 +9,7 @@ const auth = require('../../middleware/oauth')
 
 
 
-//@route POST api/user/login
+//@route POST api/auth/verifytoken
 //@desc Authenticates System Users
 //@access Public*
 router.get('/verifytoken', auth, (req, res) => {
@@ -27,8 +27,8 @@ router.get('/verifytoken', auth, (req, res) => {
 
 
 
-//@route POST api/user/login
-//@desc Authenticates System Users
+//@route POST api/auth/
+//@desc Logs in registered users(User Authentication)
 //@access Public*
 router.post('/', (req, res) => {
     const { index_num, password } = req.body.options;
@@ -37,7 +37,7 @@ router.post('/', (req, res) => {
     if (!index_num || !password) {
         return res.status(400).json("Please Provide Login Details")
     }
-    //check for already existing user
+    //check if user is an already existing user if not return error
     User.findOne({
         index_num
     }).then(user => {
@@ -49,12 +49,13 @@ router.post('/', (req, res) => {
                 message: "User does not exist"
             })
         }
+    //if user exist proceed to log them in
         console.log(user);
         User.updateOne(
             { last_seen: today },
             { where: { index_num } }
         )
-        //Validate Password
+    //Validate Password
         bcrypt.compare(password, user.password)
             .then(isMatch => {
                 if (!isMatch) return res.status(400).json({
@@ -69,7 +70,7 @@ router.post('/', (req, res) => {
                     { expiresIn: 86400 },
                     (err, token) => {
                         if (err) throw err;
-                        res.status(200).json({
+                        res.status(200).json({ //return user data back to frontend
                             auth: true,
                             token,
                             user: {
@@ -97,6 +98,11 @@ router.post('/', (req, res) => {
 
 
 
+
+
+//@route POST api/auth/signup
+//@desc Registers new users
+//@access Public*
 router.post('/signup', (req, res) => {
     const { username, userid, fullname, email, password, last_seen, level, faculty, session, index_num } = req.body;
     //validate input

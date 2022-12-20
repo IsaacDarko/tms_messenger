@@ -11,7 +11,7 @@ const UsersSchema = new Schema({
     userid: {
         type: String,
         required: false,
-        unique: true
+        unique: true,
     },
     fullname: {
         type: String,

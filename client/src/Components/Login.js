@@ -1,11 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import TextField from '@mui/material/TextField';
+import Signup from './Signup';
+import { GlobalContext } from '../Contexts/GlobalContext';
 import LoginButton from './login-button';
 import SignupButton from './signup-button';
 import '../Styles/LoginButton.css';
 import '../Styles/Login.css';
 
-function Login({ login }) {
+function Login() {
+    const {data, login} = useContext(GlobalContext);
+    const [authType, setAuthType] = useState('login');
     const [logs, setLogs] = useState({});
     const [index, setIndex] = useState('');
     const [password, setPassword] = useState('')
@@ -32,8 +36,8 @@ function Login({ login }) {
         console.log(logs)
     }, [ready])
 
-
-    return (
+    
+    return authType === 'login' ? (
         <div className="login__body">
             <div className="login__inner">
                 <div className="login__header">
@@ -41,7 +45,7 @@ function Login({ login }) {
                 </div>
 
                 <div className="login_FormFields">
-                    <TextField required id="standard-required" name="index_num" label="Index Number" variant="standard"
+                    <TextField required id="standard-required" name="index_num" label='Index Number' variant="standard"
                         onChange={e => setupLogs(e)} />
 
                     <TextField required id="standard-password-input" name="password" label="Password" type="password" variant="standard"
@@ -52,11 +56,13 @@ function Login({ login }) {
                         <LoginButton ready={ready} setReady={setReady} login={login} logs={logs} />
                     </div>
                     <div>
-                        <SignupButton />
+                        <SignupButton  setAuthType={setAuthType} />
                     </div>
                 </div>
             </div>
         </div>
+    ) : (
+        <Signup />
     )
 }
 

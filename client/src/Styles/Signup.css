@@ -1,0 +1,33 @@
+.signup__body {
+    display: grid;
+    place-items: center;
+    background-color: #dadbd3;
+    height: 100vh;
+}
+
+.signup__inner{    
+    display: grid;
+    background-color: #ededed;
+    width: 30vw;
+    place-items: center;
+    box-shadow: -1px 4px 20px -6px rgba(0,0,0,0.7);
+    border-radius: 10px;
+}
+
+.signup__header {
+    border-bottom: 1px solid lightgrey;
+    padding-bottom: 30px;
+    padding: auto;
+    
+} 
+
+.signup__FormFields {
+    flex: 1;
+    flex-direction: column;
+    padding: 1rem 1rem;
+    align-items: center;
+}
+
+.sfields {
+    margin: 0 1.3rem;
+}
