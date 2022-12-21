@@ -6,8 +6,8 @@
 }
 
 .signup__inner{    
-    background: rgb(84,225,255);
-    background: linear-gradient(0deg, rgba(84,225,255,1) 0%, rgba(216,235,246,1) 7%, rgba(235,213,233,1) 88%, rgba(255,79,79,1) 100%); 
+    background: rgb(192,244,255);
+    background: linear-gradient(0deg, rgba(192,244,255,1) 0%, rgba(213,235,222,1) 69%, rgba(91,218,255,1) 100%);  
     display: grid;
     background-color: #ededed;
     width: 30vw;

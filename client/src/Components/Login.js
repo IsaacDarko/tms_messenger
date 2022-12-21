@@ -46,13 +46,13 @@ function Login() {
 
                 <div className="login_FormFields">
                     <div className='lfields'>
-                        <TextField required id="standard-required" name="index_num" label='Index Number' variant="standard" fullWidth="true"
+                        <TextField required id="standard-required" name="index_num" label='Index Number' variant="standard" fullWidth={true}
                             onChange={e => setupLogs(e)} />
                     </div>
 
                     <div className='lfields'>
                         <TextField required id="standard-password-input" name="password" label="Password" type="password" variant="standard"
-                            fullWidth="true" onChange={e => setupLogs(e)} />
+                            fullWidth={true} onChange={e => setupLogs(e)} />
                     </div>
                 </div>
                 <div className="submition__buttons">

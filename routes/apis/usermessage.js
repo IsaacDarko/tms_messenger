@@ -94,7 +94,7 @@ router.post('/', (req, res) => {
     const newUserMessage = new UserMessage({
         chatid: req.body.chatid,
         message: req.body.message,
-        sendername: req.body.name,
+        sendername: req.body.sendername,
         senderid: req.body.senderid,
         senderdispname: req.body.sndrsdispname,
         receivername: req.body.receivername,

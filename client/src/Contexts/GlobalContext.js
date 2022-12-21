@@ -48,6 +48,7 @@ const GlobalProvider = ({ children }) => {
               console.log(currUser);
               setUser(currUser);
               setIsAuthenticated(true);
+              retrieveUsersChats()
             }
           })
       } else {
@@ -62,15 +63,11 @@ const GlobalProvider = ({ children }) => {
   
     //make necessary changes to the setup useEffect when authorized
     useEffect(() => {
-      console.log(user)
-      if (user === undefined || user === []) {
-        setLoggedInUser(user);
-      } else {
-        localStorage.setItem('user', JSON.stringify(user));
-        console.log(user);
-        retrieveUsersChats();
-        setIsAuthenticated(true);
-      }
+      const currUser = JSON.parse(localStorage.getItem('user'));
+      console.log(currUser);
+      if(user === {} || user === null){
+        setUser(currUser);
+      }   
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
@@ -156,7 +153,9 @@ const GlobalProvider = ({ children }) => {
         const { token, user } = res.data;
         setUser(user);
         setToken(token);
-        localStorage.setItem('token', token)
+        setIsAuthenticated(true);
+        localStorage.setItem('token', token);
+        localStorage.setItem('user', JSON.stringify(user));
       }).catch(err => console.log(`there was an login API Error : ${err}`))
 
     }
@@ -214,11 +213,11 @@ const GlobalProvider = ({ children }) => {
    
   
     const retrieveUsersChats = () => {
-      const myself = user
+      const myself = JSON.parse(localStorage.getItem('user'));
       console.log(myself)
       const id = myself.userid;
       console.log(id);
-      axios.get(`api/chats/chat/${id}`)
+      axios.get(`http://localhost:5000/api/chats/chat/${id}`)
         .then(res => {
           console.log(res.data);
           setChats(res.data)
@@ -510,6 +509,7 @@ const GlobalProvider = ({ children }) => {
         chatRejuvinate,
         retrieveUsersChats,
         switchOff,
+        blockUser,
         unblockUser,
         fetchChat,
         addNewChat,

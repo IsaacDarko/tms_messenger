@@ -71,9 +71,9 @@ const Chat = () => {
             axios.post('http://localhost:5000/api/messages', {
                 chatid: chatid,
                 message: input,
-                name: user.name,
+                sendername: user.fullname,
                 senderid: user.userid,
-                sndrsdispname: user.name,
+                sndrsdispname: user.fullname,
                 receivername: details.name,
                 receiverspic: details.pic,
                 receiverdispname: details.name,

@@ -27,12 +27,12 @@ const StartChatModal = () => {
             'recpt_id': recptId,
             'recpt_name': recptName,
             'sndrs_id': user.userid,
-            'sndrs_name': user.name,
+            'sndrs_name': user.fullname,
             'recpt_mail': recptMail,
             'sndrs_mail': user.email,
             'recptdispName': dispName,
             'recptPicture': dispPic,
-            'sndrsdispName': user.name,
+            'sndrsdispName': user.fullname,
             'sndrsPicture': user.picture,
             'secretKey': `${recptId}-${user.index_num}${recptIndex}-${user.userid}`,
             'last_mesge': "",
@@ -64,7 +64,7 @@ const StartChatModal = () => {
             <div className="modal__inner">
                 <div className="modal__body" style={{ zIndex: 1 }}>
                     {contactlist.map((contact) => (
-                        <div className="user__select" key={contact.user_id} onClick={() => {
+                        <div className="user__select" key={`${contact.userid}${contact.faculty}`} onClick={() => {
                             setRecptId(`${contact.userid}`);
                             setRecptIndex(`${contact.index_num}`)
                             setRecptMail(`${contact.email}`);
