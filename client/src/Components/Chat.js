@@ -15,15 +15,16 @@ const Chat = () => {
     const [endLastSeen, setEndLastSeen] = useState('');
     console.log(user);
     console.log(messages);
-    const [input, setInput] = useState("");
+    const [input, setInput] = useState('');
+    const currChat = localStorage.getItem('currentChat');
 
 
     useEffect(() => {
         console.log(currentChat)
-        unlock()
+        unlock();
         setup();
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [currentChat, isChatId, messages]);
+    }, [currentChat, isChatId, messages, messageMine]);
 
 
     useEffect(() => {
@@ -71,9 +72,9 @@ const Chat = () => {
             axios.post('http://localhost:5000/api/messages', {
                 chatid: chatid,
                 message: input,
-                sendername: user.fullname,
+                sendername: user.name,
                 senderid: user.userid,
-                sndrsdispname: user.fullname,
+                sndrsdispname: user.name,
                 receivername: details.name,
                 receiverspic: details.pic,
                 receiverdispname: details.name,
@@ -84,6 +85,7 @@ const Chat = () => {
                     alert('This User Has Blocked You')
                 } else if (response.status === 200) {
                     setInput("");
+                    fetchChat();
                 } else {
                     console.log(`Something's not right the message was not sent`)
                 }
@@ -168,9 +170,10 @@ const Chat = () => {
 
             <div className="chat__body">
                 {messages.map((message) => (
+                    
                     <div className="message__container" key={message._id}>
-                        <p className={`chat__message ${user.name !== message.receivername && 'sender__myself'}`}>
-                            <span className="chat__name">{(message.senderid === user.userid) ? user.name : currentChat.fullname}</span>
+                        <p className={user.name === message.sendername ? 'chat__message sender__myself' : 'chat__message' }>
+                            <span className="chat__name">{message.senderid === user.userid ?  user.name : currChat.fullname }</span>
                             {message.message}
                             <span className="chat__timestamp">
                                 {message.timestamp}

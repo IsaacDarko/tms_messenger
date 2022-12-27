@@ -397,7 +397,6 @@ const GlobalProvider = ({ children }) => {
           localStorage.removeItem('selectedUser');
           // eslint-disable-next-line no-unused-vars
           setIsChatId(true);
-          window.location.reload(false);
         })
           .catch(err => console.log(err))
       } else {
@@ -465,14 +464,6 @@ const GlobalProvider = ({ children }) => {
   
   
   
-
-
-
-
-
-
-
-
 
 
 

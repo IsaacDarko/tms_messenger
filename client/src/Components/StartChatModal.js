@@ -5,8 +5,8 @@ import '../Styles/StartChatModal.css';
 
 
 const StartChatModal = () => {
-    const { user, chats, contactlist, selectUser, show, switchOff } = useContext(GlobalContext);
-
+    const { chats, contactlist, selectUser, show, switchOff } = useContext(GlobalContext);
+    const user = JSON.parse(localStorage.getItem('user'));
     const [recptId, setRecptId] = useState('');
     const [recptName, setRecptName] = useState('');
     const [recptMail, setRecptMail] = useState('');
@@ -23,16 +23,17 @@ const StartChatModal = () => {
 
     const secureContactDeets = () => {
         console.log("starting secure deets");
+        console.log(user)
         const reciepient = {
             'recpt_id': recptId,
             'recpt_name': recptName,
             'sndrs_id': user.userid,
-            'sndrs_name': user.fullname,
+            'sndrs_name': user.name,
             'recpt_mail': recptMail,
             'sndrs_mail': user.email,
             'recptdispName': dispName,
             'recptPicture': dispPic,
-            'sndrsdispName': user.fullname,
+            'sndrsdispName': user.name,
             'sndrsPicture': user.picture,
             'secretKey': `${recptId}-${user.index_num}${recptIndex}-${user.userid}`,
             'last_mesge': "",
