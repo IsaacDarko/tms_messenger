@@ -101,7 +101,7 @@ const Chat = () => {
 
 
 
-    return !chatId ? (
+    return !currentChat ? (
         <div className="chat">
 
             <div className="chat__header">
@@ -132,9 +132,11 @@ const Chat = () => {
 
             <div className="chat__footer">
                 <InsertEmoticonIcon />
-                <form>
-                    <input value={input} onChange={e =>
-                        setInput(e.target.value)} placeholder="type a message" type="text" />
+                <form >
+                    <input value={input}  onClick={() => {
+                        alert('You need to select a chat first before sending a message')
+                    }} placeholder="type a message" type="text" />
+
                     <button onClick={() => {
                         alert('You need to select a chat first before sending a message')
                     }
@@ -173,7 +175,7 @@ const Chat = () => {
                     
                     <div className="message__container" key={message._id}>
                         <p className={user.name === message.sendername ? 'chat__message sender__myself' : 'chat__message' }>
-                            <span className="chat__name">{message.senderid === user.userid ?  user.name : currChat.fullname }</span>
+                            <span className="chat__name">{message.senderid === user.userid ?  user.name : currentChat.fullname }</span>
                             {message.message}
                             <span className="chat__timestamp">
                                 {message.timestamp}
