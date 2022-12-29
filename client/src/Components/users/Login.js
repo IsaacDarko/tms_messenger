@@ -1,11 +1,11 @@
 import React, { useEffect, useState, useContext } from 'react';
 import TextField from '@mui/material/TextField';
 import Signup from './Signup';
-import { GlobalContext } from '../Contexts/GlobalContext';
+import { GlobalContext } from '../../Contexts/GlobalContext';
 import LoginButton from './login-button';
 import SignupButton from './signup-button';
-import '../Styles/LoginButton.css';
-import '../Styles/Login.css'; 
+import '../../Styles/LoginButton.css';
+import '../../Styles/Login.css'; 
 
 function Login() {
     const {data, login} = useContext(GlobalContext);

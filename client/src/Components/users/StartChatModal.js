@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { GlobalContext } from '../Contexts/GlobalContext';
+import { GlobalContext } from '../../Contexts/GlobalContext';
 import { Avatar } from '@material-ui/core';
-import '../Styles/StartChatModal.css';
+import '../../Styles/StartChatModal.css';
 
 
 const StartChatModal = () => {

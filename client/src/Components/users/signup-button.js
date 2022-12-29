@@ -1,5 +1,5 @@
 import React from "react";
-import '../Styles/SignupButton.css'
+import '../../Styles/SignupButton.css'
 
 
 const SignupButton = ({ setAuthType }) => {

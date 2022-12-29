@@ -1,32 +1,18 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React from 'react';
 import './App.css';
-import { Routes } from 'react-router-dom';
-import Login from './Components/Login';
-import Chat from './Components/Chat';
-import Sidebar from './Components/Sidebar';
-import StartChatModal from './Components/StartChatModal';
-
+import {Routes, Route, Link} from 'react-router-dom';
+import {UserApp, AdminApp} from './Components';
 import { GlobalContext } from './Contexts/GlobalContext';
 
 
 function App() {
-  const {isAuthenticated} = useContext(GlobalContext);
+  return (
 
-  return isAuthenticated ? (
+      <Routes>
+        < Route exact path='/' element={<UserApp/>} />
+        < Route exact path='/admin' element={<AdminApp />} />
+      </Routes>
 
-    //using the BEM naming convention
-    <div className="app">
-
-      <div className="app__body">
-        <StartChatModal />
-        <Sidebar  />
-        <Chat />
-      </div>
-
-    </div>
-
-  ) : (
-    <Login />
   )
 }
 

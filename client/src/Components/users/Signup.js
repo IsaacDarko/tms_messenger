@@ -7,10 +7,10 @@ import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import axios from 'axios';
 import LoginButton from './login-button';
-import { GlobalContext } from '../Contexts/GlobalContext';
+import { GlobalContext } from '../../Contexts/GlobalContext';
 import SignupButton from './signup-button';
-import '../Styles/SignupButton.css';
-import '../Styles/Signup.css';
+import '../../Styles/SignupButton.css';
+import '../../Styles/Signup.css';
 import moment from 'moment';
 
 const Signup = () => {

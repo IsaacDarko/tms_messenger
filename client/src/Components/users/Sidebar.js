@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { GlobalContext } from '../Contexts/GlobalContext';
-import '../Styles/Sidebar.css';
-import '../Styles/SidebarChat.css'
+import { GlobalContext } from '../../Contexts/GlobalContext';
+import '../../Styles/Sidebar.css';
+import '../../Styles/SidebarChat.css'
 import { Avatar, IconButton } from '@material-ui/core';
 import ChatIcon from '@material-ui/icons/Chat';
 import SearchOutlined from '@material-ui/icons/SearchOutlined';

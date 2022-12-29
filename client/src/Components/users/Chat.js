@@ -1,10 +1,11 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { GlobalContext } from '../Contexts/GlobalContext';import '../Styles/Chat.css';
+import { GlobalContext } from '../../Contexts/GlobalContext';
+import '../../Styles/Chat.css';
 import { Avatar, IconButton } from '@material-ui/core';
 import { AttachFile, SearchOutlined } from '@material-ui/icons';
 import SendIcon from '@material-ui/icons/Send';
 import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
-import axios from '../axios';
+import axios from '../../axios';
 import moment from 'moment';
 import LogoutButton from './logout-button';
 
