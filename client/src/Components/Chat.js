@@ -5,6 +5,7 @@ import { AttachFile, SearchOutlined } from '@material-ui/icons';
 import SendIcon from '@material-ui/icons/Send';
 import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
 import axios from '../axios';
+import moment from 'moment';
 import LogoutButton from './logout-button';
 
 
@@ -17,6 +18,7 @@ const Chat = () => {
     console.log(messages);
     const [input, setInput] = useState('');
     const currChat = localStorage.getItem('currentChat');
+    
 
 
     useEffect(() => {
@@ -154,7 +156,7 @@ const Chat = () => {
 
                 <div className="chat__headerInfo">
                     <h3>{endName}</h3>
-                    <p><h5>Last Seen: </h5>{endLastSeen}....</p>
+                    <p><h5>Last Seen: </h5>{moment(endLastSeen).startOf('day').fromNow()}....</p>
                 </div>
 
                 <div className="chat__headerRight">
@@ -178,7 +180,7 @@ const Chat = () => {
                             <span className="chat__name">{message.senderid === user.userid ?  user.name : currentChat.fullname }</span>
                             {message.message}
                             <span className="chat__timestamp">
-                                {message.timestamp}
+                                { moment(message.timestamp).format("hh:mm:ss a") }
                             </span>
                         </p>
                     </div>

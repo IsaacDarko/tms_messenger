@@ -59,6 +59,7 @@
 .chat__timestamp {
     margin-left: 10px;
     font-size: xx-small;
+    align-self: end;
 }
 
 .chat__name {
